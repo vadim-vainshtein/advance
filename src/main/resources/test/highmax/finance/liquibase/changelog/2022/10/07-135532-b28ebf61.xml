@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.11.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="finance">
+        <dropColumn columnName="FROM_ACC_ID" tableName="TRANSACTION"/>
+
+        <dropColumn columnName="TO_ACC_ID" tableName="TRANSACTION"/>
+    </changeSet>
+    <changeSet id="2" author="finance">
+        <addColumn tableName="TRANSACTION">
+            <column name="FROM_ACC_ID" type="UUID">
+                <constraints foreignKeyName="FK_TRANSACTION_ON_FROM_ACC" references="BANK_ACCOUNT(ID)"/>
+            </column>
+            <column name="TO_ACC_ID" type="UUID">
+                <constraints foreignKeyName="FK_TRANSACTION_ON_TO_ACC" references="BANK_ACCOUNT(ID)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

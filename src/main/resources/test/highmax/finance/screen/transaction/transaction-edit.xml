@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://transactionEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="transactionDc"
+                  class="test.highmax.finance.entity.Transaction">
+            <fetchPlan extends="_base">
+                <property name="fromAccount" fetchPlan="_base"/>
+                <property name="type" fetchPlan="_base"/>
+                <property name="toAccount" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+            <collection id="typeDc" property="type"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="transactionDc">
+            <column width="350px">
+                <entityPicker id="fromAccountField" property="fromAccount">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+                <entityPicker id="toAccountField" property="toAccount">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+                <dateField id="createDateField" property="createDate"/>
+                <textField id="transferAmountField" property="transferAmount"/>
+            </column>
+        </form>
+        <groupBox id="typeBox" caption="msg://test.highmax.finance.entity/Transaction.type">
+            <table id="typeTable" dataContainer="typeDc" width="100%" height="200px">
+                <actions>
+                    <action id="add" type="add"/>
+                    <action id="exclude" type="exclude"/>
+                </actions>
+                <columns>
+                    <column id="name"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="typeTable.add"/>
+                    <button action="typeTable.exclude"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

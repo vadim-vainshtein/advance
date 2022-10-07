@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/ui/menu">
+
+    <menu id="application" caption="msg://test.highmax.finance/menu.application" insertBefore="administration">
+        <!--item screen="User.browse" caption="msg://test.highmax.finance.screen.user/UserBrowse.caption"/-->
+        <item screen="Client.browse" caption="msg://test.highmax.finance.screen.client/clientBrowse.menu"/>
+        <item screen="BankAccount.browse"
+              caption="msg://test.highmax.finance.screen.bankaccount/bankAccountBrowse.menu"/>
+        <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
+        <item screen="Transaction.browse"
+              caption="msg://test.highmax.finance.screen.transaction/transactionBrowse.menu"/>
+        <item screen="TransactionType.browse"
+              caption="msg://test.highmax.finance.screen.transactiontype/transactionTypeBrowse.menu"/>
+
+    </menu>
+
+</menu-config>
