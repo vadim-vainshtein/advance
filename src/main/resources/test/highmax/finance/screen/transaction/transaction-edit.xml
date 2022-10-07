@@ -44,11 +44,11 @@
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
-                <dateField id="createDateField" property="createDate"/>
+                <dateField id="createDateField" property="createDate" autofill="true"/>
                 <textField id="transferAmountField" property="transferAmount"/>
             </column>
         </form>
-        <groupBox id="typeBox" caption="msg://test.highmax.finance.entity/Transaction.type">
+        <groupBox id="typeBox" caption="Transaction type">
             <table id="typeTable" dataContainer="typeDc" width="100%" height="200px">
                 <actions>
                     <action id="add" type="add"/>

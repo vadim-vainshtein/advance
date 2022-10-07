@@ -8,6 +8,9 @@
 **Необходимо разработать систему учета личных финансов с использованием JMix**
 *https://docs.google.com/document/d/1Dyuch4WS2GtbLP5p0IuBqY1sF9mH5d4nbDhY3PlbiOE/edit#*
 
+Transaction:
+-----
+- валидация полей to/fromAccount (Не одновременно null, не одинаковы) - ValidTransactionAccounts
 Проблемы
 ------
 - Автоматическое присвоение ролей клиенту (на данный момент приходится вводить вручную через панель администратора)

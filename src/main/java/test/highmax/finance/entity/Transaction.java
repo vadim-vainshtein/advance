@@ -4,13 +4,18 @@ import io.jmix.core.DeletePolicy;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.entity.annotation.OnDeleteInverse;
 import io.jmix.core.metamodel.annotation.JmixEntity;
+import io.jmix.core.validation.group.UiCrossFieldChecks;
+import test.highmax.finance.annotation.ValidTransactionAccounts;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.groups.Default;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+@ValidTransactionAccounts(groups = {Default.class, UiCrossFieldChecks.class})
 @JmixEntity
 @Table(name = "TRANSACTION")
 @Entity(name = "Transaction")
@@ -37,6 +42,7 @@ public class Transaction {
     private BankAccount toAccount;
 
     @Column(name = "CREATE_DATE", columnDefinition = "timestamp")
+    @PastOrPresent
     private LocalDate createDate;
 
     @Column(name = "TRANSFER_AMOUNT", nullable = false, columnDefinition = "bigint")
@@ -63,6 +69,7 @@ public class Transaction {
         return fromAccount;
     }
 
+    @NotNull(message = "Please specify at least one type in the Transaction type field")
     public List<TransactionType> getType() {
         return type;
     }

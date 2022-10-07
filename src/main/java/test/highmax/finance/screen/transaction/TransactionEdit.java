@@ -1,12 +1,11 @@
 package test.highmax.finance.screen.transaction;
 
+import io.jmix.core.DataManager;
 import io.jmix.ui.Notifications;
 import io.jmix.ui.screen.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import test.highmax.finance.entity.BankAccount;
 import test.highmax.finance.entity.Transaction;
-
-import java.util.EventObject;
 
 @UiController("Transaction.edit")
 @UiDescriptor("transaction-edit.xml")
@@ -16,38 +15,32 @@ public class TransactionEdit extends StandardEditor<Transaction> {
     @Autowired
     Notifications notifications;
 
-    @Subscribe
-    public void onInit(InitEvent event) {
+    @Autowired
+    DataManager dataManager;
 
-
-    }
-
-    
     @Subscribe
     public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
 
         BankAccount toAccount = getEditedEntity().getToAccount();
         BankAccount fromAccount = getEditedEntity().getFromAccount();
 
-        // prevent commit if the accounts are same
-        try {
-            if (toAccount.equals(fromAccount)) {
-                sameAccounts(event, );
-            }
-            // = if(toAccount == null)
-        } catch (NullPointerException e) {
-            if(fromAccount == null) {
-                sameAccounts(event);
-            }
+        // приход, если указан целевой счёт
+        if(toAccount != null) {
+            toAccount.setAmount(toAccount.getAmount() + getEditedEntity().getTransferAmount());
+            dataManager.save(toAccount);
         }
-    }
 
-    /**
-     * Прервать commit, выдав сообщение о недопустимости одинаковых счетов в полях ввода
-     * @param event
-     */
-    private void sameAccounts(BeforeCommitChangesEvent event) {
-        notifications.create().withCaption("From account and To account should be different").show();
-        event.preventCommit();
+        // расход, если указан счёт списания
+        if(fromAccount != null) {
+            long amount = getEditedEntity().getTransferAmount();
+            // Если недостаточно средств
+            if(fromAccount.getAmount() < amount) {
+                notifications.create().withCaption("Not enough money on " + fromAccount.getName()).show();
+                event.preventCommit();
+            }
+
+            fromAccount.setAmount(fromAccount.getAmount() - amount);
+            dataManager.save(fromAccount);
+        }
     }
 }
