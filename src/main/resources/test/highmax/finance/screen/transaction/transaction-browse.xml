@@ -11,11 +11,7 @@
                 <property name="type" fetchPlan="_base"/>
                 <property name="toAccount" fetchPlan="_base"/>
             </fetchPlan>
-            <loader id="transactionsDl">
-                <query>
-                    <![CDATA[select e from Transaction e]]>
-                </query>
-            </loader>
+            <loader id="transactionsDl"/>
         </collection>
     </data>
     <facets>
@@ -51,7 +47,7 @@
                 <column id="fromAccount"/>
                 <column id="toAccount"/>
                 <column id="createDate"/>
-                <column id="transferAmount"/>
+                <column id="rub"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

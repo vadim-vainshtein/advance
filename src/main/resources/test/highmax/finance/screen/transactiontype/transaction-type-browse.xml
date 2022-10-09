@@ -8,9 +8,7 @@
                     class="test.highmax.finance.entity.TransactionType">
             <fetchPlan extends="_base"/>
             <loader id="transactionTypesDl">
-                <query>
-                    <![CDATA[select e from TransactionType e]]>
-                </query>
+
             </loader>
         </collection>
     </data>

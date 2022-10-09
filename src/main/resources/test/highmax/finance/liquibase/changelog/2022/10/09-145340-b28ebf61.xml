@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.11.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="finance">
+        <addColumn tableName="TYPE">
+            <column name="TRANSACTION_ID" type="UUID"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2" author="finance">
+        <createIndex indexName="IDX_TYPE_TRANSACTION" tableName="TYPE">
+            <column name="TRANSACTION_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="TRANSACTION_ID" baseTableName="TYPE"
+                                 constraintName="FK_TYPE_ON_TRANSACTION" referencedColumnNames="ID"
+                                 referencedTableName="TRANSACTION"/>
+    </changeSet>
+    <changeSet id="3" author="finance">
+        <dropForeignKeyConstraint baseTableName="TRANSACTION_TO_TYPE" constraintName="FK_TRATOTYP_ON_TRANSACTION"/>
+    </changeSet>
+    <changeSet id="4" author="finance">
+        <dropForeignKeyConstraint baseTableName="TRANSACTION_TO_TYPE" constraintName="FK_TRATOTYP_ON_TRANSACTIONTYPE"/>
+    </changeSet>
+    <changeSet id="5" author="finance">
+        <dropTable cascadeConstraints="true" tableName="TRANSACTION_TO_TYPE"/>
+    </changeSet>
+</databaseChangeLog>

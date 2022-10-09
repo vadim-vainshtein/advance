@@ -19,7 +19,10 @@ public class BankAccountEdit extends StandardEditor<BankAccount> {
     public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
 
         User currentUser = (User) currentAuthentication.getUser();
-        getEditedEntity().setUser(currentUser);
+        BankAccount edited = getEditedEntity();
+        edited.setUser(currentUser);
+        // кол-во денег хранится в копейках, сразу конвертируем в рубли
+        getEditedEntity().setAmount((long) (getEditedEntity().getRub()*100));
     }
 
 }

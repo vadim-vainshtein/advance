@@ -2,6 +2,7 @@ package test.highmax.finance.screen.transaction;
 
 import io.jmix.core.DataManager;
 import io.jmix.ui.Notifications;
+import io.jmix.ui.component.HasValue;
 import io.jmix.ui.screen.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import test.highmax.finance.entity.BankAccount;
@@ -17,6 +18,8 @@ public class TransactionEdit extends StandardEditor<Transaction> {
 
     @Autowired
     DataManager dataManager;
+
+
 
     @Subscribe
     public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
@@ -42,5 +45,10 @@ public class TransactionEdit extends StandardEditor<Transaction> {
             fromAccount.setAmount(fromAccount.getAmount() - amount);
             dataManager.save(fromAccount);
         }
+    }
+
+    @Subscribe("rubField")
+    public void onRubFieldValueChange(HasValue.ValueChangeEvent<Double> event) {
+        getEditedEntity().setTransferAmount((long) (getEditedEntity().getRub() * 100));
     }
 }

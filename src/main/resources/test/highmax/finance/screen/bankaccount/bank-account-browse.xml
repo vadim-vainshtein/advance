@@ -6,12 +6,10 @@
     <data readOnly="true">
         <collection id="bankAccountsDc"
                     class="test.highmax.finance.entity.BankAccount">
-            <fetchPlan extends="_base"/>
-            <loader id="bankAccountsDl">
-                <query>
-                    <![CDATA[select e from BankAccount e]]>
-                </query>
-            </loader>
+            <fetchPlan extends="_base">
+                <property name="user" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="bankAccountsDl"/>
         </collection>
     </data>
     <facets>
@@ -44,8 +42,9 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="amount"/>
                 <column id="name"/>
+                <column id="rub" caption="Amount"/>
+                <column id="user"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

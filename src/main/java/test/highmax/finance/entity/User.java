@@ -1,6 +1,8 @@
 package test.highmax.finance.entity;
 
 import io.jmix.core.HasTimeZone;
+import io.jmix.core.annotation.DeletedBy;
+import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.annotation.Secret;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.entity.annotation.SystemLevel;
@@ -14,7 +16,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.UUID;
+
 
 @JmixEntity
 @Entity
@@ -56,10 +60,17 @@ public class User implements JmixUserDetails, HasTimeZone {
     @Column(name = "TIME_ZONE_ID")
     protected String timeZoneId;
 
+    @DeletedBy
+    @Column(name = "DELETED_BY")
+    private String deletedBy;
+
+    @DeletedDate
+    @Temporal(TemporalType.DATE)
+    @Column(name = "DELETED_DATE")
+    private Date deletedDate;
+
     @Transient
     protected Collection<? extends GrantedAuthority> authorities;
-
-
 
     public UUID getId() {
         return id;
@@ -76,6 +87,7 @@ public class User implements JmixUserDetails, HasTimeZone {
     public void setVersion(Integer version) {
         this.version = version;
     }
+
 
     public String getPassword() {
         return password;
@@ -170,5 +182,21 @@ public class User implements JmixUserDetails, HasTimeZone {
 
     public void setTimeZoneId(String timeZoneId) {
         this.timeZoneId = timeZoneId;
+    }
+
+    public String getDeletedBy() {
+        return deletedBy;
+    }
+
+    public void setDeletedBy(String deletedBy) {
+        this.deletedBy = deletedBy;
+    }
+
+    public Date getDeletedDate() {
+        return deletedDate;
+    }
+
+    public void setDeletedDate(Date deletedDate) {
+        this.deletedDate = deletedDate;
     }
 }
