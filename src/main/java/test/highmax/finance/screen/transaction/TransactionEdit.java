@@ -13,40 +13,6 @@ import test.highmax.finance.entity.Transaction;
 @EditedEntityContainer("transactionDc")
 public class TransactionEdit extends StandardEditor<Transaction> {
 
-    @Autowired
-    Notifications notifications;
-
-    @Autowired
-    DataManager dataManager;
-
-
-
-    @Subscribe
-    public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
-
-        BankAccount toAccount = getEditedEntity().getToAccount();
-        BankAccount fromAccount = getEditedEntity().getFromAccount();
-
-        // приход, если указан целевой счёт
-        if(toAccount != null) {
-            toAccount.setAmount(toAccount.getAmount() + getEditedEntity().getTransferAmount());
-            dataManager.save(toAccount);
-        }
-
-        // расход, если указан счёт списания
-        if(fromAccount != null) {
-            long amount = getEditedEntity().getTransferAmount();
-            // Если недостаточно средств
-            if(fromAccount.getAmount() < amount) {
-                notifications.create().withCaption("Not enough money on " + fromAccount.getName()).show();
-                event.preventCommit();
-            }
-
-            fromAccount.setAmount(fromAccount.getAmount() - amount);
-            dataManager.save(fromAccount);
-        }
-    }
-
     @Subscribe("rubField")
     public void onRubFieldValueChange(HasValue.ValueChangeEvent<Double> event) {
         getEditedEntity().setTransferAmount((long) (getEditedEntity().getRub() * 100));

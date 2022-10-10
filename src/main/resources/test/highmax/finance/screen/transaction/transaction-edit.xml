@@ -45,7 +45,7 @@
                     </actions>
                 </entityPicker>
                 <dateField id="createDateField" property="createDate" autofill="true"/>
-                <textField id="rubField" property="rub"/>
+                <textField id="rubField" property="rub" caption="Amount"/>
             </column>
         </form>
         <groupBox id="typeBox" caption="Transaction type">

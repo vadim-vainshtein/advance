@@ -47,7 +47,7 @@
                 <column id="fromAccount"/>
                 <column id="toAccount"/>
                 <column id="createDate"/>
-                <column id="rub"/>
+                <column id="rub" caption="Amount"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
