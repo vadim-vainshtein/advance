@@ -29,8 +29,8 @@
     <layout spacing="true" expand="editActions">
         <form id="form" dataContainer="bankAccountDc">
             <column width="350px">
-                <textField id="nameField" property="name"/>
-                <textField id="rubField" property="rub"/>
+                <textField id="nameField" property="name" caption="Account name"/>
+                <textField id="rubField" property="rub" caption="Initial amount"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

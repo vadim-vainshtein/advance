@@ -6,11 +6,11 @@
         <item screen="Client.browse" caption="msg://test.highmax.finance.screen.client/clientBrowse.menu"/>
         <item screen="BankAccount.browse"
               caption="msg://test.highmax.finance.screen.bankaccount/bankAccountBrowse.menu"/>
-        <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
         <item screen="Transaction.browse"
               caption="msg://test.highmax.finance.screen.transaction/transactionBrowse.menu"/>
         <item screen="TransactionType.browse"
               caption="msg://test.highmax.finance.screen.transactiontype/transactionTypeBrowse.menu"/>
+        <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
 
     </menu>
 

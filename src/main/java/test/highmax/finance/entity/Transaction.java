@@ -31,12 +31,12 @@ public class Transaction {
 
     @OnDeleteInverse(DeletePolicy.CASCADE)
     @JoinColumn(name = "FROM_ACC_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private BankAccount fromAccount;
 
     @OnDeleteInverse(DeletePolicy.CASCADE)
     @JoinColumn(name = "TO_ACC_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private BankAccount toAccount;
 
     @JoinTable(name = "TRANSACTION_TO_TYPE",

@@ -44,10 +44,10 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="fromAccount"/>
-                <column id="toAccount"/>
-                <column id="createDate"/>
                 <column id="rub" caption="Amount"/>
+                <column id="fromAccount" caption="From"/>
+                <column id="toAccount" caption="To"/>
+                <column id="createDate" caption="Date"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

@@ -44,7 +44,11 @@
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
-                <dateField id="createDateField" property="createDate" autofill="true"/>
+                <dateField id="createDateField" property="createDate" autofill="true">
+                    <validators>
+                        <pastOrPresent/>
+                    </validators>
+                </dateField>
                 <textField id="rubField" property="rub" caption="Amount"/>
             </column>
         </form>

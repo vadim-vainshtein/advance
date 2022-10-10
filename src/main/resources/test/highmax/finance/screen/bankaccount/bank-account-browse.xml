@@ -42,9 +42,8 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="name"/>
+                <column id="name" caption="Account name"/>
                 <column id="rub" caption="Amount"/>
-                <column id="user"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

@@ -44,11 +44,6 @@ public class BankAccount {
     @Version
     private Integer version;
 
-    @NumberFormat(pattern = "#,##0.00")
-    @JmixProperty
-    @Transient
-    private Double rub;
-
     @DeletedBy
     @Column(name = "DELETED_BY")
     private String deletedBy;
@@ -57,6 +52,11 @@ public class BankAccount {
     @Column(name = "DELETED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
+
+    @NumberFormat(pattern = "#,##0.00")
+    @JmixProperty
+    @Transient
+    private Double rub;
 
     public Date getDeletedDate() {
         return deletedDate;

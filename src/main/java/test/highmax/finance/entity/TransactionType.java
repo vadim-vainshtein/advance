@@ -24,9 +24,9 @@ public class TransactionType {
     @Id
     private UUID id;
 
+    @NotNull
     @InstanceName
     @Column(name = "NAME", nullable = false)
-    @NotNull
     private String name;
 
     @JoinColumn(name = "CLIENT_ID")
