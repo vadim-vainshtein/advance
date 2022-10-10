@@ -2,6 +2,7 @@ package test.highmax.finance.listener;
 
 import io.jmix.core.DataManager;
 import io.jmix.core.Id;
+import liquibase.pro.packaged.I;
 import org.springframework.beans.factory.annotation.Autowired;
 import test.highmax.finance.entity.BankAccount;
 import test.highmax.finance.entity.Transaction;
@@ -45,7 +46,13 @@ public class TransactionEventListener {
             if(event.getChanges().isChanged("fromAccount")) {
                 Id<BankAccount> oldFromAccountId = event.getChanges().getOldValue("fromAccount");
                 if(oldFromAccountId == null) oldFromAccount = null;
-                else oldFromAccount = dataManager.load(BankAccount.class).id(oldFromAccountId).one();
+                else {
+                    try {
+                        oldFromAccount = dataManager.load(BankAccount.class).id(oldFromAccountId).one();
+                    } catch (IllegalStateException e) {
+                        oldFromAccount = null;
+                    }
+                }
             } // Если не менялся - оставим новый
             else {
                 oldFromAccount = newFromAccount;
@@ -60,7 +67,13 @@ public class TransactionEventListener {
             if(event.getChanges().isChanged("toAccount")) {
                 Id<BankAccount> oldToAccountId = event.getChanges().getOldValue("toAccount");
                 if(oldToAccountId == null) oldToAccount = null;
-                else oldToAccount = dataManager.load(BankAccount.class).id(oldToAccountId).one();
+                else {
+                    try {
+                        oldToAccount = dataManager.load(BankAccount.class).id(oldToAccountId).one();
+                    } catch (IllegalStateException e) {
+                        oldToAccount = null;
+                    }
+                }
             }
             else {
                 oldToAccount = newToAccount;
