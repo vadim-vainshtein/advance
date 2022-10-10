@@ -43,6 +43,7 @@ public class Transaction {
             joinColumns = @JoinColumn(name = "TRANSACTION_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "TRANSACTION_TYPE_ID", referencedColumnName = "ID"))
     @ManyToMany
+    @OnDeleteInverse(DeletePolicy.CASCADE)
     private List<TransactionType> type;
 
     @Column(name = "CREATE_DATE", columnDefinition = "timestamp")
